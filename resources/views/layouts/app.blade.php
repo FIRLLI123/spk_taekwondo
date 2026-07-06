@@ -12,9 +12,10 @@
     <link href="{{ asset('sbadmin2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
     <link href="{{ asset('sbadmin2/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom-theme.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
-<body id="page-top">
+<body id="page-top" class="app-admin">
     <div id="wrapper">
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
@@ -144,7 +145,7 @@
                     </ul>
                 </nav>
 
-                <div class="container-fluid">
+                <div class="container-fluid app-page">
                     @if(session('status'))
                         <div class="alert alert-success">{{ session('status') }}</div>
                     @endif

@@ -4,20 +4,20 @@
 @section('page_heading', 'Data Kriteria')
 
 @section('content')
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="app-toolbar page-header">
         <div>
-            <h1 class="h3 mb-0 text-gray-800">Data Kriteria</h1>
-            <p class="mb-0 text-gray-600">Kelola kriteria penilaian, bobot, dan tipe atribut TOPSIS.</p>
+            <h1 class="page-header-title mb-1">Data Kriteria</h1>
+            <p class="page-header-subtitle mb-0">Kelola kriteria penilaian, bobot, dan tipe atribut TOPSIS.</p>
         </div>
         <a href="{{ route('criteria.create') }}" class="btn btn-primary shadow-sm">
             <i class="fas fa-plus fa-sm text-white-50 mr-1"></i> Tambah Kriteria
         </a>
     </div>
 
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4 app-table-card">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered">
+                <table class="table table-bordered table-hover align-middle mb-0">
                     <thead class="thead-light">
                         <tr>
                             <th>Kode</th>
@@ -37,12 +37,18 @@
                                 <td><span class="badge badge-{{ $criterion->attribute === 'benefit' ? 'success' : 'danger' }}">{{ ucfirst($criterion->attribute) }}</span></td>
                                 <td>{{ $criterion->description ?: '-' }}</td>
                                 <td>
-                                    <a href="{{ route('criteria.edit', $criterion) }}" class="btn btn-sm btn-warning">Edit</a>
-                                    <form action="{{ route('criteria.destroy', $criterion) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus kriteria ini?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                                    </form>
+                                    <div class="table-action-group">
+                                        <a href="{{ route('criteria.edit', $criterion) }}" class="btn btn-sm btn-warning table-action-btn" title="Edit kriteria" aria-label="Edit kriteria">
+                                            <i class="fas fa-pen"></i>
+                                        </a>
+                                        <form action="{{ route('criteria.destroy', $criterion) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus kriteria ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger table-action-btn" title="Hapus kriteria" aria-label="Hapus kriteria">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @empty

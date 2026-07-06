@@ -4,10 +4,10 @@
 @section('page_heading', 'Data Atlet')
 
 @section('content')
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="app-toolbar page-header">
         <div>
-            <h1 class="h3 mb-0 text-gray-800">Data Atlet</h1>
-            <p class="mb-0 text-gray-600">Kelola data atlet yang menjadi alternatif dalam proses TOPSIS.</p>
+            <h1 class="page-header-title mb-1">Data Atlet</h1>
+            <p class="page-header-subtitle mb-0">Kelola data atlet yang menjadi alternatif dalam proses TOPSIS.</p>
         </div>
         @if(auth()->user()->isAdmin())
             <a href="{{ route('athletes.create') }}" class="btn btn-primary shadow-sm">
@@ -16,7 +16,7 @@
         @endif
     </div>
 
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4 app-table-card">
         <div class="card-body">
             <form method="GET" class="form-inline mb-3">
                 <input type="text" name="search" class="form-control mr-2 mb-2" placeholder="Cari nama, kode, sabuk, kelas..." value="{{ $search }}">
@@ -25,7 +25,7 @@
             </form>
 
             <div class="table-responsive">
-                <table class="table table-bordered">
+                <table class="table table-bordered table-hover align-middle mb-0">
                     <thead class="thead-light">
                         <tr>
                             <th>Kode</th>
@@ -52,12 +52,18 @@
                                 <td><span class="badge badge-{{ $athlete->status === 'aktif' ? 'success' : 'secondary' }}">{{ ucfirst($athlete->status) }}</span></td>
                                 @if(auth()->user()->isAdmin())
                                     <td>
-                                        <a href="{{ route('athletes.edit', $athlete) }}" class="btn btn-sm btn-warning">Edit</a>
-                                        <form action="{{ route('athletes.destroy', $athlete) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus data atlet ini?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                                        </form>
+                                        <div class="table-action-group">
+                                            <a href="{{ route('athletes.edit', $athlete) }}" class="btn btn-sm btn-warning table-action-btn" title="Edit atlet" aria-label="Edit atlet">
+                                                <i class="fas fa-pen"></i>
+                                            </a>
+                                            <form action="{{ route('athletes.destroy', $athlete) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus data atlet ini?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger table-action-btn" title="Hapus atlet" aria-label="Hapus atlet">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 @endif
                             </tr>

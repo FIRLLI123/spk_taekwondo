@@ -4,10 +4,10 @@
 @section('page_heading', 'Laporan')
 
 @section('content')
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="page-header">
         <div>
-            <h1 class="h3 mb-0 text-gray-800">Laporan</h1>
-            <p class="mb-0 text-gray-600">Ringkasan penilaian dan hasil ranking per periode.</p>
+            <h1 class="page-header-title mb-1">Laporan</h1>
+            <p class="page-header-subtitle mb-0">Ringkasan penilaian dan hasil ranking per periode.</p>
         </div>
     </div>
 
@@ -81,7 +81,7 @@
             </div>
         </div>
 
-        <div class="card shadow mb-4">
+        <div class="card shadow mb-4 app-table-card">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Laporan Ranking</h6>
             </div>
@@ -90,7 +90,7 @@
                     <div class="alert alert-warning mb-0">Belum ada hasil ranking pada periode ini.</div>
                 @else
                     <div class="table-responsive">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered table-hover align-middle mb-0">
                             <thead class="thead-light">
                                 <tr>
                                     <th>Ranking</th>
@@ -119,7 +119,7 @@
             </div>
         </div>
 
-        <div class="card shadow mb-4">
+        <div class="card shadow mb-4 app-table-card">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Rekap Rata-rata Penilaian</h6>
             </div>
@@ -128,7 +128,7 @@
                     <div class="alert alert-warning mb-0">Belum ada data penilaian pada periode ini.</div>
                 @else
                     <div class="table-responsive">
-                        <table class="table table-bordered table-sm">
+                        <table class="table table-bordered table-hover align-middle table-sm mb-0">
                             <thead class="thead-light">
                                 <tr>
                                     <th>Kode Atlet</th>

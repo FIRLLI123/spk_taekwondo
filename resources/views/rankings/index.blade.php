@@ -4,10 +4,10 @@
 @section('page_heading', 'Hasil Ranking')
 
 @section('content')
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="page-header">
         <div>
-            <h1 class="h3 mb-0 text-gray-800">Hasil Ranking</h1>
-            <p class="mb-0 text-gray-600">Lihat hasil preferensi dan detail perhitungan TOPSIS per periode.</p>
+            <h1 class="page-header-title mb-1">Hasil Ranking</h1>
+            <p class="page-header-subtitle mb-0">Lihat hasil preferensi dan detail perhitungan TOPSIS per periode.</p>
         </div>
     </div>
 
@@ -37,12 +37,12 @@
         <div class="row">
             <div class="col-lg-7 mb-4">
                 <div class="card shadow">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Daftar Ranking</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Daftar Ranking</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                            <table class="table table-bordered table-hover align-middle mb-0">
                                 <thead class="thead-light">
                                     <tr>
                                         <th>Ranking</th>
@@ -99,7 +99,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive mb-4">
-                        <table class="table table-bordered table-sm">
+                        <table class="table table-bordered table-hover align-middle table-sm mb-0">
                             <thead class="thead-light">
                                 <tr>
                                     <th>Kriteria</th>

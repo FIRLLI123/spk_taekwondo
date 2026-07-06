@@ -4,10 +4,10 @@
 @section('page_heading', 'Proses TOPSIS')
 
 @section('content')
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="page-header">
         <div>
-            <h1 class="h3 mb-0 text-gray-800">Proses TOPSIS</h1>
-            <p class="mb-0 text-gray-600">Jalankan perhitungan ranking berdasarkan nilai yang sudah diinput pelatih.</p>
+            <h1 class="page-header-title mb-1">Proses TOPSIS</h1>
+            <p class="page-header-subtitle mb-0">Jalankan perhitungan ranking berdasarkan nilai yang sudah diinput pelatih.</p>
         </div>
     </div>
 

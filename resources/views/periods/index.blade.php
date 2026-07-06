@@ -4,20 +4,20 @@
 @section('page_heading', 'Periode Penilaian')
 
 @section('content')
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="app-toolbar page-header">
         <div>
-            <h1 class="h3 mb-0 text-gray-800">Periode Penilaian</h1>
-            <p class="mb-0 text-gray-600">Kelola periode aktif untuk proses penilaian dan ranking atlet.</p>
+            <h1 class="page-header-title mb-1">Periode Penilaian</h1>
+            <p class="page-header-subtitle mb-0">Kelola periode aktif untuk proses penilaian dan ranking atlet.</p>
         </div>
         <a href="{{ route('periods.create') }}" class="btn btn-primary shadow-sm">
             <i class="fas fa-plus fa-sm text-white-50 mr-1"></i> Tambah Periode
         </a>
     </div>
 
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4 app-table-card">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered">
+                <table class="table table-bordered table-hover align-middle mb-0">
                     <thead class="thead-light">
                         <tr>
                             <th>Nama Periode</th>
@@ -39,12 +39,18 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <a href="{{ route('periods.edit', $period) }}" class="btn btn-sm btn-warning">Edit</a>
-                                    <form action="{{ route('periods.destroy', $period) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus periode ini?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                                    </form>
+                                    <div class="table-action-group">
+                                        <a href="{{ route('periods.edit', $period) }}" class="btn btn-sm btn-warning table-action-btn" title="Edit periode" aria-label="Edit periode">
+                                            <i class="fas fa-pen"></i>
+                                        </a>
+                                        <form action="{{ route('periods.destroy', $period) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus periode ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger table-action-btn" title="Hapus periode" aria-label="Hapus periode">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @empty
