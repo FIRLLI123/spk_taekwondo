@@ -53,19 +53,21 @@
                 </a>
             </li>
 
-            <li class="nav-item {{ request()->routeIs('criteria.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('criteria.index') }}">
-                    <i class="fas fa-fw fa-balance-scale"></i>
-                    <span>Kriteria</span>
-                </a>
-            </li>
+            @if(auth()->user()->isAdmin())
+                <li class="nav-item {{ request()->routeIs('criteria.*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('criteria.index') }}">
+                        <i class="fas fa-fw fa-balance-scale"></i>
+                        <span>Kriteria</span>
+                    </a>
+                </li>
 
-            <li class="nav-item {{ request()->routeIs('periods.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('periods.index') }}">
-                    <i class="fas fa-fw fa-calendar"></i>
-                    <span>Periode</span>
-                </a>
-            </li>
+                <li class="nav-item {{ request()->routeIs('periods.*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('periods.index') }}">
+                        <i class="fas fa-fw fa-calendar"></i>
+                        <span>Periode</span>
+                    </a>
+                </li>
+            @endif
 
             <hr class="sidebar-divider">
 
@@ -125,7 +127,9 @@
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     {{ auth()->user()->name }} ({{ strtoupper(auth()->user()->role) }})
                                 </span>
-                                <img class="img-profile rounded-circle" src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=4e73df&color=ffffff">
+                                <span class="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary text-white font-weight-bold" style="width: 2rem; height: 2rem;">
+                                    {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                                </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <form action="{{ route('logout') }}" method="POST">
@@ -143,6 +147,12 @@
                 <div class="container-fluid">
                     @if(session('status'))
                         <div class="alert alert-success">{{ session('status') }}</div>
+                    @endif
+
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            {{ $errors->first() }}
+                        </div>
                     @endif
 
                     @yield('content')

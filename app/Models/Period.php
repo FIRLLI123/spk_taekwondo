@@ -30,4 +30,9 @@ class Period extends Model
     {
         return $this->hasMany(TopsisResult::class);
     }
+
+    public function getDateRangeAttribute()
+    {
+        return $this->start_date->format('d M Y') . ' - ' . $this->end_date->format('d M Y');
+    }
 }

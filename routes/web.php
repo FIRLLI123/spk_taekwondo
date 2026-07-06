@@ -2,8 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AthleteController;
+use App\Http\Controllers\CriterionController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\PeriodController;
+use App\Http\Controllers\RankingController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ScoreController;
+use App\Http\Controllers\TopsisController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return auth()->check()
@@ -20,15 +27,21 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/athletes', [ModuleController::class, 'athletes'])->name('athletes.index');
-    Route::get('/criteria', [ModuleController::class, 'criteria'])->name('criteria.index');
-    Route::get('/periods', [ModuleController::class, 'periods'])->name('periods.index');
-    Route::get('/scores', [ModuleController::class, 'scores'])->name('scores.index');
-    Route::get('/rankings', [ModuleController::class, 'rankings'])->name('rankings.index');
+    Route::get('/scores', [ScoreController::class, 'index'])->name('scores.index');
+    Route::post('/scores', [ScoreController::class, 'store'])->name('scores.store');
+    Route::get('/rankings', [RankingController::class, 'index'])->name('rankings.index');
+    Route::get('/athletes', [AthleteController::class, 'index'])->name('athletes.index');
 
     Route::middleware('role:admin')->group(function () {
-        Route::get('/users', [ModuleController::class, 'users'])->name('users.index');
-        Route::get('/topsis/process', [ModuleController::class, 'topsis'])->name('topsis.process');
-        Route::get('/reports', [ModuleController::class, 'reports'])->name('reports.index');
+        Route::resource('athletes', AthleteController::class)->except(['index', 'show']);
+        Route::resource('criteria', CriterionController::class)->except('show');
+        Route::resource('periods', PeriodController::class)->except('show');
+        Route::resource('users', UserController::class)->except('show');
+        Route::get('/topsis/process', [TopsisController::class, 'index'])->name('topsis.process');
+        Route::post('/topsis/process', [TopsisController::class, 'store'])->name('topsis.run');
+        Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+        Route::get('/reports/print', [ReportController::class, 'print'])->name('reports.print');
+        Route::get('/reports/export/xlsx', [ReportController::class, 'exportXlsx'])->name('reports.export.xlsx');
+        Route::get('/reports/export/pdf', [ReportController::class, 'exportPdf'])->name('reports.export.pdf');
     });
 });

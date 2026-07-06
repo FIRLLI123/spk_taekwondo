@@ -21,4 +21,9 @@ class Criterion extends Model
     {
         return $this->hasMany(Score::class);
     }
+
+    public function getFormattedWeightAttribute()
+    {
+        return rtrim(rtrim(number_format($this->weight, 4, '.', ''), '0'), '.');
+    }
 }

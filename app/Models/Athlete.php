@@ -33,4 +33,9 @@ class Athlete extends Model
     {
         return $this->hasMany(TopsisResult::class);
     }
+
+    public function getDisplayNameAttribute()
+    {
+        return $this->code . ' - ' . $this->name;
+    }
 }

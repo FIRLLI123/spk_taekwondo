@@ -32,4 +32,9 @@ class TopsisResult extends Model
     {
         return $this->belongsTo(Athlete::class);
     }
+
+    public function getPreferencePercentageAttribute()
+    {
+        return round($this->preference_value * 100, 2);
+    }
 }
