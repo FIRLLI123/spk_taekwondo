@@ -43,5 +43,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/reports/print', [ReportController::class, 'print'])->name('reports.print');
         Route::get('/reports/export/xlsx', [ReportController::class, 'exportXlsx'])->name('reports.export.xlsx');
         Route::get('/reports/export/pdf', [ReportController::class, 'exportPdf'])->name('reports.export.pdf');
+        Route::get('/reports/export/pdf/file', [ReportController::class, 'exportPdfFile'])->name('reports.export.pdf.file');
     });
 });

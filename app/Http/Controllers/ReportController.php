@@ -45,6 +45,27 @@ class ReportController extends Controller
         $pdf = PDF::loadView('reports.pdf', $data)
             ->setPaper('a4', 'portrait');
 
-        return $pdf->download($filename);
+        return view('reports.pdf_preview', [
+            'pdfBase64' => base64_encode($pdf->output()),
+            'filename' => $filename,
+            'downloadUrl' => route('reports.export.pdf.file', ['period_id' => $request->get('period_id')]),
+        ]);
+    }
+
+    public function exportPdfFile(Request $request)
+    {
+        $data = $this->reportService->build($request->get('period_id'));
+        $selectedPeriod = $data['selectedPeriod'];
+        $filename = 'laporan-espa-team-' . ($selectedPeriod ? $selectedPeriod->id : 'periode') . '.pdf';
+
+        $pdf = PDF::loadView('reports.pdf', $data)
+            ->setPaper('a4', 'portrait');
+
+        return response($pdf->output(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+            'Cache-Control' => 'private, max-age=0, must-revalidate',
+            'Pragma' => 'public',
+        ]);
     }
 }
