@@ -137,15 +137,17 @@ class TopsisService
         DB::transaction(function () use ($period, $results, $criteria, $positiveIdeal, $negativeIdeal) {
             TopsisResult::where('period_id', $period->id)->delete();
 
+            $insertData = [];
+            $now = now();
             foreach ($results as $index => $result) {
-                TopsisResult::create([
+                $insertData[] = [
                     'period_id' => $period->id,
                     'athlete_id' => $result['athlete_id'],
                     'preference_value' => $result['preference_value'],
                     'positive_distance' => $result['positive_distance'],
                     'negative_distance' => $result['negative_distance'],
                     'rank' => $index + 1,
-                    'calculation_detail' => [
+                    'calculation_detail' => json_encode([
                         'criteria' => $criteria->map(function ($criterion) {
                             return [
                                 'id' => $criterion->id,
@@ -160,9 +162,13 @@ class TopsisService
                         'weighted_matrix' => $result['weighted_matrix'],
                         'positive_ideal' => $positiveIdeal,
                         'negative_ideal' => $negativeIdeal,
-                    ],
-                ]);
+                    ]),
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ];
             }
+
+            TopsisResult::insert($insertData);
         });
 
         return collect($results);
