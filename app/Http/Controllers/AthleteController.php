@@ -28,14 +28,21 @@ class AthleteController extends Controller
 
     public function create()
     {
+        $athlete = new Athlete();
+        $athlete->code = Athlete::generateNextCode();
+
         return view('athletes.form', [
-            'athlete' => new Athlete(),
+            'athlete' => $athlete,
             'isEdit' => false,
         ]);
     }
 
     public function store(Request $request)
     {
+        if (!$request->filled('code')) {
+            $request->merge(['code' => Athlete::generateNextCode()]);
+        }
+
         Athlete::create($this->validateRequest($request));
 
         return redirect()

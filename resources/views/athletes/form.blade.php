@@ -18,7 +18,8 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Kode Atlet</label>
-                        <input type="text" name="code" class="form-control" value="{{ old('code', $athlete->code) }}" required>
+                        <input type="text" name="code" class="form-control" value="{{ old('code', $athlete->code) }}" required readonly>
+                        <small class="form-text text-muted">Kode atlet dibuat secara otomatis oleh sistem.</small>
                     </div>
                     <div class="form-group col-md-6">
                         <label>Nama Atlet</label>
