@@ -27,7 +27,7 @@
     <h1>Laporan SPK Atlet ESPA Team</h1>
     <div class="meta">
         <div><strong>Periode:</strong> {{ optional($selectedPeriod)->name ?: '-' }}</div>
-        <div><strong>Tanggal Cetak:</strong> {{ now()->format('d M Y H:i') }}</div>
+        <div><strong>Tanggal Cetak:</strong> {{ now()->locale('id')->isoFormat('dddd, D MMMM YYYY HH:mm') }}</div>
     </div>
 
     <div class="summary">

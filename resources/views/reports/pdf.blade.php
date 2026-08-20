@@ -48,7 +48,7 @@
         <tr>
             <td>Tanggal Cetak</td>
             <td>:</td>
-            <td>{{ now()->format('d F Y H:i') }}</td>
+            <td>{{ now()->locale('id')->isoFormat('dddd, D MMMM YYYY HH:mm') }}</td>
         </tr>
     </table>
 
